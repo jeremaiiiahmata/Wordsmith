@@ -1,0 +1,1 @@
+A Blog application in line with Angela Yu's Web Development 2024 Bootcamp. The application doesn't include a database, but uses technologies such as NodeJS for the back-end, and uses ExpressJS framework.
