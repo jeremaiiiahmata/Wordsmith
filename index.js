@@ -6,6 +6,7 @@ const app = express();
 const port = 3000; 
 
 let blogData = [];
+let nextID = 0;
 
 const logArray = (req, res, next) => {
     console.table(blogData);
@@ -17,7 +18,11 @@ app.use(morgan("tiny"));
 app.use(logArray);
 
 app.post("/submit", (req, res) => {
+
+    nextID++;
+
     const data = {
+        id : nextID,
         title : req.body['title'], 
         author : req.body['author'],
         content : req.body['content']
@@ -29,6 +34,19 @@ app.post("/submit", (req, res) => {
 
     console.table(blogData);
     res.redirect('/');
+})
+
+app.get("/blog/:id", (req, res) => {
+
+    console.log(req.params.id);
+
+    const ID = req.params.id;
+
+    const {title, author, content} = blogData[ID-1];
+
+    res.send(title);
+
+
 })
 
 app.get("/compose", (req, res) => {
